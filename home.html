@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1><span id="time"></span></h1>
+<script src="home.js"></script>
+<script>
+    var xhr=new XMLHttpRequest()
+    xhr.onreadystatechange=function () {
+        if(xhr.readyState===4&&xhr.status===200){
+           var s=JSON.parse(xhr.responseText);
+           var seconds= s.data
+           var t = setInterval(function () {
+               if(seconds>=0){
+
+
+                   var a=getDate(seconds--)
+                   console.log(a)
+                   document.getElementById('time').innerText="距离2022年还有："+a
+               }else{
+                   clearInterval(t)
+                   alert('新年快乐')
+               }
+
+           },1000)
+
+        }
+    }
+    xhr.open('get','home.php')
+    xhr.send()
+</script>
+</body>
+</html>
