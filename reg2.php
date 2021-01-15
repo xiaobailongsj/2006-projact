@@ -1,7 +1,7 @@
 <?php
 
 $name = $_GET['data'];
-$mysqli = new mysqli("127.0.0.1", "root", "root", "2006");
+$mysqli = new mysqli("127.0.0.1", "root", "rootroot", "2006");
 $sql = "select * from `user` where account='$name' || tel='$name' || email='$name'";
 //echo $sql;die;
 $res = $mysqli->query($sql);

@@ -6,7 +6,7 @@ $pwd= $_POST['pwd'];
 $is_pwd= $_POST['is_pwd'];
 
 //链接数据库
-$mysqli=new mysqli('127.0.0.1','root','root','2006');
+$mysqli=new mysqli('127.0.0.1','root','rootroot','2006');
 //验证密码
 if(strlen($pwd)<6){
 
