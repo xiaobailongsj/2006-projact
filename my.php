@@ -26,7 +26,7 @@ if(empty($_SESSION['user'])){
 <br>
 <h2>注册时间:</h2><h3><span id="c"></span></h3>
 
-
+<button><a href="b.html">订座</a></button>
 <button><a href="Session.php">退出</a></button>
 <script src="../jquery-3.5.1.min.js"></script>
 <script src="function.js"></script>
