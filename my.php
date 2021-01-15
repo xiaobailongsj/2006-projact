@@ -3,7 +3,7 @@
 session_start();
 if(empty($_SESSION['user'])){
     echo "请先登录";
-    header('Refresh:3,url=login.html');
+    header('Refresh:3,url=login1.html');
     exit;
 }
 
