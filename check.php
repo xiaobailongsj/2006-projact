@@ -4,7 +4,7 @@ $tel=$_POST['tel'];
 $email= $_POST['email'];
 $pwd= $_POST['pwd'];
 $is_pwd= $_POST['is_pwd'];
-
+$time= time();
 //链接数据库
 $mysqli=new mysqli('127.0.0.1','root','rootroot','2006');
 //验证密码
@@ -63,7 +63,7 @@ if(!empty($email)){
 $pwd = password_hash($pwd,PASSWORD_DEFAULT);
 if(password_verify($is_pwd,$pwd)){
 
-    $sql="insert into user(account,tel,email,pwd)values ('$account','$tel','$email','$pwd')";
+    $sql="insert into user(account,tel,email,pwd,time)values ('$account','$tel','$email','$pwd','$time')";
 //echo $sql;die;
     $res=$mysqli->query($sql);
 
