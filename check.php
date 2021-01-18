@@ -6,8 +6,9 @@ $pwd= $_POST['pwd'];
 $is_pwd= $_POST['is_pwd'];
 $time= time();
 //链接数据库
-$mysqli=new mysqli('127.0.0.1','root','rootroot','2006');
-//验证密码
+include "pdo.php";
+
+$mysqli = getPdo();//验证密码
 if(strlen($pwd)<6){
 
     $response=[

@@ -1,9 +1,11 @@
 <?php
 
 $account = $_POST['account'];
+include "pdo.php";
 
+$mysqli = getPdo();
 $pwd = $_POST['pwd'];
-$mysqli = new mysqli('127.0.0.1', 'root', 'rootroot', '2006');
+
 $sql = "select * from user where account='$account'||email='$account'||tel='$account'";
 //echo $sql;
 $res = $mysqli->query($sql);

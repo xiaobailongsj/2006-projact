@@ -16,6 +16,12 @@ if(empty($_SESSION['user'])){
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        a{
+            text-decoration: none;
+            color: black;
+        }
+    </style>
 </head>
 <body>
 <h1>个人中心</h1>
@@ -26,7 +32,7 @@ if(empty($_SESSION['user'])){
 <br>
 <h2>注册时间:</h2><h3><span id="c"></span></h3>
 
-<button><a href="b.html">订座</a></button>
+<button><a href="table.php">订座</a></button>
 <button><a href="Session.php">退出</a></button>
 <script src="../jquery-3.5.1.min.js"></script>
 <script src="function.js"></script>

@@ -11,7 +11,7 @@ $('#form').submit(function (event) {
         if(d.error==0){
             alert('登录成功')
 
-            window.location.href='my.php'
+            window.location.href='table.php'
         }else{
             alert(d.mag)
         }

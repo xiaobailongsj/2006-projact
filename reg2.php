@@ -1,7 +1,8 @@
 <?php
 
 $name = $_GET['data'];
-$mysqli = new mysqli("127.0.0.1", "root", "rootroot", "2006");
+include "pdo.php";
+$mysqli = getPdo();
 $sql = "select * from `user` where account='$name' || tel='$name' || email='$name'";
 //echo $sql;die;
 $res = $mysqli->query($sql);

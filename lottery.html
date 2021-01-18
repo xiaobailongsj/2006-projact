@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .a{
+            width: 400px;
+            height: 400px;
+        }
+        .div{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            float: left;
+            margin: 10px;
+            border: 5px solid white;
+                   }
+        .border{
+            border: 5px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>距离抽奖结束：<span class="time"></span></h1>
+    <div class="a">
+        <div class="div"></div>
+        <div class="div"></div>
+        <div class="div"></div>
+        <div class="div"></div>
+        <div class="div"></div>
+        <div class="div"></div>
+        <div class="div"></div>
+        <div class="div"></div>
+        <div class="div"></div>
+    </div>
+    <hr>
+    <button class="begin">开始</button>
+    <button class="finish">停止</button>
+
+
+
+
+    <script src="../jquery-3.5.1.min.js"></script>
+    <script>
+        $.ajax({
+            url:'lott.php',
+            method: 'POST',
+            dataType: 'json'
+        }).done(function (d) {
+            var lot = d.data;
+            var times = setInterval(function () {
+                if(lot>=0) {
+                    var day = Math.floor((lot / 86400))
+                    var h = Math.floor((lot / 3600) % 24)
+                    var m = Math.floor((lot / 60) % 60)
+                    var s = Math.floor(lot % 60)
+                    var time = day + '天' + h + '小时' + m + '分钟' + s + '秒'
+                    $('.time').text(time)
+                    lot--
+                }else {
+                    clearInterval(times)
+                    alert("抽奖活动以结束")
+                    for(var j=0;j<timers.length;j++){
+                        clearInterval(timers[j])
+                        timers.splice(i,1)
+                    }
+                    $('.begin').unbind('click')
+                    $('.finish').unbind('click')
+                }
+
+            },1000)
+        })
+
+        var timers = []
+        $(".begin").click(function () {
+        $.ajax({
+            url:'table2.php',
+            method:'POST',
+            dataType:'json'
+        }).done(function (b) {
+            console.log(b)
+            if(b.errno==400001){
+                alert(b.msg)
+                window.location.href="login1.html"
+                return
+            }
+            for(var i =0;i<timers.length;i++){
+                clearInterval(timers[i])
+                timers.splice(i,1)
+            }
+            var time = setInterval(function () {
+
+                var div= $(".div")
+                div.css("background-color","red")
+                div.empty()
+                div.removeClass("border")
+                var index = parseInt(Math.random()*1000)%9
+                div.eq(index).addClass("border")
+            },500)
+            timers.push(time)
+            $(".finish").click(function () {
+
+                var div = $(".div")
+                $.ajax({
+                    url:'lot.php',
+                    method:'POST',
+                    dataType:'json'
+                }).done(function (d) {
+                    // console.log(d)
+                    for(var i =0;i<timers.length;i++){
+                        clearInterval(timers[i])
+                        timers.splice(i,1)
+                    }
+
+                    div.empty()
+                    div.each(function(index){
+                        if($(this).hasClass('border')){
+                            div.eq(index).append(d.msg).css({"background-color":"yellow","font-size":"30px"});
+                        }
+                    })
+                    $('.finish').unbind('click')
+                })
+            })
+        })
+
+
+        })
+
+    </script>
+</body>
+
+</html>
