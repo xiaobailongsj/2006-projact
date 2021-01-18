@@ -81,7 +81,7 @@ if($_SESSION['user']==""){
 
 
 </div>
-<script src="../jquery-3.5.1.min.js"></script>
+<script src="js/jquery-3.5.1.min.js"></script>
 <script>
 
     $('.but').click(function () {

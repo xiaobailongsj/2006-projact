@@ -34,8 +34,8 @@ if(empty($_SESSION['user'])){
 
 <button><a href="table.php">订座</a></button>
 <button><a href="Session.php">退出</a></button>
-<script src="../jquery-3.5.1.min.js"></script>
-<script src="function.js"></script>
-<script src="cook.js"></script>
+<script src="js/jquery-3.5.1.min.js"></script>
+<script src="js/function.js"></script>
+<script src="js/cook.js"></script>
 </body>
 </html>
