@@ -10,7 +10,7 @@ $arr = mysqli_fetch_all($res,1);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>座位表</title>
 </head>
 <style>
     a{
@@ -38,6 +38,12 @@ $arr = mysqli_fetch_all($res,1);
         display: block;
         margin-left:10px;
     }
+    .red{
+        background-color: red;
+    }
+    .green{
+        background-color: green;
+    }
 </style>
 <body>
 
@@ -55,7 +61,7 @@ if($_SESSION['user']==""){
 }
 ?>
 
-
+<hr>
 
 
 
@@ -63,17 +69,29 @@ if($_SESSION['user']==""){
 <div class="b">
     <div class="a">
         <h1>房间预订</h1>
-        <span class="time"></span>
+        <h3><span class="time"></span></h3>
     </div>
     <ul>
         <?php
 
          foreach ($arr as $k=>$v){
-//             $status = $v['status']==0?'预约':'已预约';
-             echo "<li data-id=\"{$v['id']}\" data-status=$v[status]>
-                <button class=\"but\" >预约 ￥{$v['price']}</button>
-                <h3 class=\"a\">{$v['name']}</h3>
-                </li>";
+             $status = $v['status'];
+             $price = $v['price'];
+             $status_class = [
+                     'red','green'
+
+             ];
+             $class=$status_class[$v['status']];
+             echo "<li class='{$class}' data-id=\"{$v['id']}\" data-status=\"$v[status]\">";
+                
+                
+                if($status){
+                    echo "<button class=\"but\" disabled='disabled'>已预约</button>";
+                }else{
+                    echo "<button class=\"but\" >预约 ￥{$price}</button>";
+                }
+                echo "<h3 class='a'>{$v['name']}</h3>";
+                echo "</li>";
          }
 
 
@@ -102,8 +120,9 @@ if($_SESSION['user']==""){
                     window.location.href = 'login1.html'
                     return
                 }
+
                 self.parent().css('backgroundColor','green')
-                // self.parent().attr('data-status',1)
+
                 self.text('已预约').attr('disabled','disabled')
 
             })
@@ -112,6 +131,7 @@ if($_SESSION['user']==""){
 
 
     })
+
     setInterval(function () {
         var arr= ['周日','周一','周二','周三','周四','周五','周六']
         var date= new Date();
